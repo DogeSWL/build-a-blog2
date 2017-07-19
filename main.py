@@ -1,5 +1,5 @@
 from flask import request, redirect, flash, render_template
-from app import app
+from app import app, db
 # from flask_sqlalchemy import SQLAlchemy
 # import os
 
