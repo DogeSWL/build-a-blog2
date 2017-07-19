@@ -1,6 +1,5 @@
 from flask import Flask, request, redirect, flash, render_template
 from flask_sqlalchemy import SQLAlchemy
-from models import Blog
 import os
 
 app = Flask(__name__)
@@ -10,6 +9,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'mysql+py
 app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
+
+from models import Blog
 
 # class Blog(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
