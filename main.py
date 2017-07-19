@@ -1,5 +1,6 @@
 from flask import Flask, request, redirect, flash, render_template
 from flask_sqlalchemy import SQLAlchemy
+from models import Blog
 import os
 
 app = Flask(__name__)
@@ -10,14 +11,14 @@ app.config['SQLALCHEMY_ECHO'] = True
 
 db = SQLAlchemy(app)
 
-class Blog(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(120))
-    body = db.Column(db.String(120))
-
-    def __init__(self, title, body):
-        self.title = title
-        self.body = body
+# class Blog(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     title = db.Column(db.String(120))
+#     body = db.Column(db.String(120))
+#
+#     def __init__(self, title, body):
+#         self.title = title
+#         self.body = body
 
 def get_blogList():
     return Blog.query.all()
@@ -43,11 +44,6 @@ def add_Blog():
         blog = Blog(title=new_blogTitle, body=new_blogEntry)
         db.session.add(blog)
         db.session.commit()
-
-        # lastID = db.session.query(Blog.id).order_by(Blog.id.desc()).first()
-        #
-        # for curID in lastID:
-        #     return redirect('/blog?id'+str(curID))
         return redirect('/blog?id='+str(blog.id))
 
 @app.route("/newpost")
